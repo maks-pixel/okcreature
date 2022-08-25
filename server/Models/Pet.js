@@ -17,7 +17,7 @@ Pet.init({
     },
     sex: {
         type: DataTypes.STRING,
-        allowNull: false
+    
     },
     image: {
         type: DataTypes.STRING,
@@ -42,6 +42,14 @@ Pet.init({
     },
     other_pets: {
         type: DataTypes.BOOLEAN
+    },
+    quiz_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'quiz',
+            key: 'id'
+        }
     }
 },
     {
