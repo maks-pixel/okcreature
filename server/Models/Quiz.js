@@ -1,7 +1,7 @@
 const { Sequelize, DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Quiz extends Model {}
+class Quiz extends Model { }
 
 Quiz.init({
     id: {
@@ -12,7 +12,7 @@ Quiz.init({
     },
     sex: {
         type: DataTypes.STRING
-       
+
     },
     ageCategory: {
         type: DataTypes.STRING
@@ -38,13 +38,13 @@ Quiz.init({
         }
     }
 },
-{
-    sequelize,
-    freezeTableName: true,
-    underscored: true,
-    modelName: 'PET'
-});
+    {
+        sequelize,
+        freezeTableName: true,
+        underscored: true,
+        modelName: 'Quiz'
+    });
 
-user_id
+
 
 module.exports = Quiz;
