@@ -36,6 +36,14 @@ User.init({
         validate: {
             len: [6]
         }
+    },
+    quiz_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: {
+            model: 'quiz',
+            key: 'id'
+        }
     }
 }, {
 
