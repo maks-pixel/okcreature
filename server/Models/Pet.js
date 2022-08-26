@@ -1,5 +1,4 @@
-const { Sequelize, DataTypes, Model } = require('sequelize');
-const { formatNamedParameters } = require('sequelize/types/utils');
+const {  DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/connection');
 
 class Pet extends Model { }
