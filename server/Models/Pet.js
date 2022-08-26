@@ -49,7 +49,7 @@ Pet.init({
         sequelize,
         freezeTableName: true,
         underscored: true,
-        modelName: 'pet'
+        modelName: 'Pet'
     });
 
 

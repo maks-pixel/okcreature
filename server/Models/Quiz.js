@@ -1,4 +1,4 @@
-const { Sequelize, DataTypes, Model } = require('sequelize');
+const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/connection');
 
 class Quiz extends Model { }
@@ -33,7 +33,7 @@ Quiz.init({
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: 'pet',
+            model: 'Pet',
             key: 'id'
         }
     }
