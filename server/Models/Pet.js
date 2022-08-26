@@ -1,5 +1,5 @@
-const { Sequelize, DataTypes, Model } = require('sequelize');
-const { formatNamedParameters } = require('sequelize/types/utils');
+const { DataTypes, Model } = require('sequelize');
+
 const sequelize = require('../config/connection');
 
 class Pet extends Model { }
@@ -49,7 +49,7 @@ Pet.init({
         sequelize,
         freezeTableName: true,
         underscored: true,
-        modelName: 'PET'
+        modelName: 'pet'
     });
 
 
