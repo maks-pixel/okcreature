@@ -39,7 +39,7 @@ User.init({
     },
     quiz_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        //allowNull: false,
         references: {
             model: 'quiz',
             key: 'id'
