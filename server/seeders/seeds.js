@@ -1,10 +1,11 @@
 const { faker } = require('@faker-js/faker');
-
-const db = require('../config/connection');
-
+const sequelize = require('../config/connection');
 const { Pet } = require('../Models');
 
-db.once('open', () => {
+
+const seedPets = async () => {
+
+    await sequelize.sync({ force: true });
 
     let petData = []
 
@@ -32,7 +33,7 @@ db.once('open', () => {
         let household = faker.helpers.arrayElement(["baby", "child", "adult", "senior"]);
         let other_pets = faker.datatype.boolean();
 
-        pets.push({
+        petData.push({
             "id": id,
             "name": name,
             "sex": sex, 
@@ -46,10 +47,14 @@ db.once('open', () => {
             "other_pets": other_pets
         });
     }
+    await Pet.bulkCreate(petData);
 
-    const createdPets = await Pet.collection.insertMany(petData);
-
-    console.log('all done');
     process.exit(0);
+};
 
-})
+seedPets();
+
+ 
+
+
+  

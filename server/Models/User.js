@@ -1,4 +1,4 @@
-const { Sequelize, DataTypes, Model } = require('sequelize');
+const { DataTypes, Model } = require('sequelize');
 const sequelize = require('../config/connection');  //check path
 const bcrypt = require('bcrypt');
 
@@ -45,7 +45,8 @@ User.init({
             key: 'id'
         }
     }
-}, {
+}, 
+{
 
     hooks: {
         async beforeCreate(newUserData) {

@@ -15,7 +15,7 @@ Quiz.belongsTo(User, {
 
 //one-to-many relationship
 Quiz.hasMany(Pet, {
-    foreignKey: "pet_id",
+    foreignKey: "quiz_id",
     onDelete: "cascade",
     hooks: true
 });
