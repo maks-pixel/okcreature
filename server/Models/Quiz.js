@@ -12,7 +12,6 @@ Quiz.init({
     },
     sex: {
         type: DataTypes.STRING
-
     },
     ageCategory: {
         type: DataTypes.STRING
@@ -31,19 +30,20 @@ Quiz.init({
     },
     user_id: {
         type: DataTypes.INTEGER,
+        //allowNull:false,
         references: {
             model: 'user',
             key: 'id'
         }
     },
-    pet_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-            model: 'Pet',
-            key: 'id'
-        }
-    }
+    // pet_id: { //should this be an array of pet ids??
+    //     type: DataTypes.INTEGER,
+    //     //allowNull: false,
+    //     references: {
+    //         model: 'Pet',
+    //         key: 'id'
+    //     }
+    // }
 },
     {
         sequelize,
