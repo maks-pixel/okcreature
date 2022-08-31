@@ -7,7 +7,7 @@ router.use('/api', apiRoutes);
 //router.use('/', homeRoutes)
 
 router.use((req, res) => {
-    //res.redirect('/login')
+    //res.redirect('/')
     res.status(404).end();
 })
 

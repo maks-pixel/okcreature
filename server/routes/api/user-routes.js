@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Quiz } = require('../../Models');
+const { User } = require('../../Models');
 
 // get all users (for testing purposes)  GET /api/users WORKS
 router.get('/', (req, res) => {
@@ -53,6 +53,11 @@ router.post('/', (req, res) => {
 //         email: req.body.email
 //     }
 //   })
+//     .then(dbUserData => res.json(dbUserData))
+//     .catch(err => {
+//         console.log(err);
+//         res.status(500).json(err);
+//     });
 // });
 
 
@@ -61,14 +66,14 @@ router.post('/', (req, res) => {
 
 // });
 
-//edit user (quiz id is added or replaced) PUT /api/users/1
+//edit user (quiz id is added or replaced) PUT /api/users/1 ERROR: No body returned for response
 router.put(':/id', (req, res) => {
     User.update(req.body, {
         where: {
             id: req.params.id
         }
     })
-        .then(dbUserData => {
+        .then(dbUserData => {  
             if (!dbUserData[0]) {
                 res.status(404).json({ message: 'No user found with this id' });
                 return;
