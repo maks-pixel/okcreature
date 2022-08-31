@@ -14,28 +14,28 @@ router.get('/', (req, res) => {
 // GET /api/users/1 
 router.get('/:id', (req, res) => {
     User.findOne({
-      where: {
-        id: req.params.id
-      }
-    })
-      .then(dbUserData => {
-        if (!dbUserData) {
-          res.status(404).json({ message: 'No user found with this id' });
-          return;
+        where: {
+            id: req.params.id
         }
-        res.json(dbUserData);
-      })
-      .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-      });
-  });
+    })
+        .then(dbUserData => {
+            if (!dbUserData) {
+                res.status(404).json({ message: 'No user found with this id' });
+                return;
+            }
+            res.json(dbUserData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
 
 //create user, sign up POST /api/users  
 router.post('/', (req, res) => {
     User.create({
         username: req.body.username,
-        email: req.body.email, 
+        email: req.body.email,
         password: req.body.password,
         //quiz_id will be inserted when user creates a quiz??
     })
@@ -66,16 +66,41 @@ router.post('/', (req, res) => {
 
 // });
 
-//edit user (quiz id is added or replaced) PUT /api/users/1 ERROR: No body returned for response
-router.put(':/id', (req, res) => {
+
+
+// PUT /api/users/1  ( changing quiz_id here doesn't work - change through user model
+router.put('/:id', (req, res) => {
+    
+  
+    // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead
     User.update(req.body, {
         individualHooks: true,
         where: {
             id: req.params.id
         }
     })
-        .then(dbUserData => {  
-            if (!dbUserData[0]) {
+      .then(dbUserData => {
+        if (!dbUserData[0]) {
+          res.status(404).json({ message: 'No user found with this id' });
+          return;
+        }
+        res.json(dbUserData);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  });
+
+//delete a user DELETE /api/users/1 
+router.delete('/:id', (req, res) => {
+    User.destroy({
+        where: {
+            id: req.params.id
+        }
+    })
+        .then(dbUserData => {
+            if (!dbUserData) {
                 res.status(404).json({ message: 'No user found with this id' });
                 return;
             }
@@ -84,26 +109,6 @@ router.put(':/id', (req, res) => {
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
-        });
-});
-
-//delete a user DELETE /api/users/1 
-router.delete('/:id', (req, res) =>{
-    User.destroy({
-        where: {
-          id: req.params.id
-        }
-      })
-        .then(dbUserData => {
-          if (!dbUserData) {
-            res.status(404).json({ message: 'No user found with this id' });
-            return;
-          }
-            res.json(dbUserData);
-        })
-        .catch(err => {
-          console.log(err);
-          res.status(500).json(err);
         });
 });
 

@@ -4,7 +4,7 @@ const Pet = require('./Pet');
 
 //one-to-one relationship
 User.hasOne(Quiz, {
-    foreignKey: "quiz_id",
+    foreignKey: "user_id",
     hooks: true
 });
 
