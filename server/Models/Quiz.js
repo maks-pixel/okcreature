@@ -29,6 +29,13 @@ Quiz.init({
     other_pets: {
         type: DataTypes.BOOLEAN
     },
+    user_id: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: 'user',
+            key: 'id'
+        }
+    },
     pet_id: {
         type: DataTypes.INTEGER,
         allowNull: false,

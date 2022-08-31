@@ -5,7 +5,7 @@ const { Pet } = require('../Models');
 
 const seedPets = async () => {
 
-    await sequelize.sync({ force: true });
+    await sequelize.sync({ force: false });
 
     let petData = []
 

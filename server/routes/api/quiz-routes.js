@@ -2,14 +2,12 @@ const router = require('express').Router();
 
 const { User, Pet, Quiz } = require('../../Models');
 
-//find all pets findAll
+//create a quiz (associated with a user)
 
-//find a pet by search term findByPk
+//get a quiz by user id
 
-//add a pet  create
+// edit a quiz
 
-//edit a pet  update
-
-//delete a pet
+//delete a quiz
 
 module.exports = router;
