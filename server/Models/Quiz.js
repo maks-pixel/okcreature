@@ -42,7 +42,7 @@ Quiz.init({
         sequelize,
         freezeTableName: true,
         underscored: true,
-        modelName: 'Quiz'
+        modelName: 'quiz'
     });
 
 

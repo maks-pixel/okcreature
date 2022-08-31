@@ -39,7 +39,7 @@ User.init({
     },
     quiz_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: true,
         references: {
             model: 'quiz',
             key: 'id'
@@ -58,12 +58,11 @@ User.init({
             return updatedUserData
         }
     },
-}, 
-{
+
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: 'User'
+    modelName: 'user'
 });
 
 module.exports = User;
