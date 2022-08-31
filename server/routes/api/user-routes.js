@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { User } = require('../../Models');
 
-// get all users (for testing purposes)  GET /api/users WORKS
+// get all users (for testing purposes)  GET /api/users 
 router.get('/', (req, res) => {
     User.findAll()
         .then(dbUserData => res.json(dbUserData))
@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
         });
 });
 
-// GET /api/users/1 WORKS
+// GET /api/users/1 
 router.get('/:id', (req, res) => {
     User.findOne({
       where: {
@@ -31,7 +31,7 @@ router.get('/:id', (req, res) => {
       });
   });
 
-//create user, sign up POST /api/users  WORKS
+//create user, sign up POST /api/users  
 router.post('/', (req, res) => {
     User.create({
         username: req.body.username,
@@ -69,6 +69,7 @@ router.post('/', (req, res) => {
 //edit user (quiz id is added or replaced) PUT /api/users/1 ERROR: No body returned for response
 router.put(':/id', (req, res) => {
     User.update(req.body, {
+        individualHooks: true,
         where: {
             id: req.params.id
         }
@@ -83,10 +84,10 @@ router.put(':/id', (req, res) => {
         .catch(err => {
             console.log(err);
             res.status(500).json(err);
-        })
+        });
 });
 
-//delete a user DELETE /api/users/1 WORKS
+//delete a user DELETE /api/users/1 
 router.delete('/:id', (req, res) =>{
     User.destroy({
         where: {
