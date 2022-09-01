@@ -1,10 +1,16 @@
 const router = require('express').Router();
-const { User } = require('../../Models');
+const { User, Quiz } = require('../../Models');
 
 // get all users (for testing purposes)  GET /api/users 
 router.get('/', (req, res) => {
     User.findAll({
-        attributes: { exclude: ['password'] }
+        attributes: { exclude: ['password'] },
+        include: [
+            {
+                model: Quiz,
+                attributes: ['id']
+            }
+        ]
     })
         .then(dbUserData => res.json(dbUserData))
         .catch(err => {
@@ -19,7 +25,13 @@ router.get('/:id', (req, res) => {
         attributes: { exclude: ['password'] },
         where: {
             id: req.params.id
-        }
+        },
+        include: [
+            {
+                model: Quiz,
+                attributes: ['id']
+            }
+        ]
     })
         .then(dbUserData => {
             if (!dbUserData) {
@@ -40,6 +52,7 @@ router.post('/', (req, res) => {
         username: req.body.username,
         email: req.body.email,
         password: req.body.password,
+        quiz_id: req.body.quiz_id
         //quiz_id will be inserted when user creates a quiz??
     })
         .then(dbUserData => res.json(dbUserData))
@@ -88,7 +101,6 @@ router.post('/login', (req, res) => {
 
 // PUT /api/users/1  ( changing quiz_id here doesn't work - change through user model
 router.put('/:id', (req, res) => {
-
 
     // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead
     User.update(req.body, {

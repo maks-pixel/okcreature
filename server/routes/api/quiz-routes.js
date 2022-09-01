@@ -54,7 +54,8 @@ router.post('/', (req, res) => {
        category: req.body.category,
        needs: req.body.needs,
        household: req.body.household,
-       other_pets: req.body.other_pets 
+       other_pets: req.body.other_pets,
+       user_id: req.body.user_id
     })
         .then(dbUserData => res.json(dbUserData))
         .catch(err => {
