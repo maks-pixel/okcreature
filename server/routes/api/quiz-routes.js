@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { User, Pet, Quiz } = require('../../Models');
 
-//get all quiz GET api/quiz/
+//get all quizzes GET api/quiz/
 router.get('/', (req, res) => {
     Quiz.findAll({
         attributes: ['id', 'sex', 'ageCategory', 'category', 'needs', 'household', 'other_pets'], //add pet_id later
@@ -29,33 +29,33 @@ router.get('/:id', (req, res) => {
         include: [
             {
                 model: User,
-                attributes: ['id'] 
+                attributes: ['id']
             }
         ]
     })
-    .then(dbQuizData => {
-        if (!dbQuizData) {
-            res.status(404).json({ message:'No quiz found with this id' });
-            return;
-        }
-        res.json(dbQuizData);
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-    });
+        .then(dbQuizData => {
+            if (!dbQuizData) {
+                res.status(404).json({ message: 'No quiz found with this id' });
+                return;
+            }
+            res.json(dbQuizData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
 });
 
-//create a quiz (associated with a user) POST api/quiz
+//create a quiz (associated with a user) POST api/quiz/quiz_id/user_id
 router.post('/', (req, res) => {
     Quiz.create({
-       sex: req.body.sex,
-       ageCategory: req.body.ageCategory,
-       category: req.body.category,
-       needs: req.body.needs,
-       household: req.body.household,
-       other_pets: req.body.other_pets,
-       user_id: req.body.user_id
+        sex: req.body.sex,
+        ageCategory: req.body.ageCategory,
+        category: req.body.category,
+        needs: req.body.needs,
+        household: req.body.household,
+        other_pets: req.body.other_pets,
+        user_id: req.body.user_id
     })
         .then(dbUserData => res.json(dbUserData))
         .catch(err => {
@@ -64,7 +64,37 @@ router.post('/', (req, res) => {
         });
 });
 
-// edit a quiz
+// edit a quiz 
+router.put('/:id/:user_id', (req, res) => {
+    Quiz.update(
+        //what fields do you want to update?
+        {
+            sex: req.body.sex,
+            ageCategory: req.body.ageCategory,
+            category: req.body.category,
+            needs: req.body.needs,
+            household: req.body.household,
+            other_pets: req.body.other_pets
+        },
+        {
+            where: {
+                id: req.params.id,
+                user_id: req.params.id
+            }
+        }
+    )
+        .then(dbQuizData => {
+            if (!dbQuizData) {
+                res.status(404).json({ message: 'No quiz found for this user' });
+                return;
+            }
+            res.json(dbQuizData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+});
 
 //delete a quiz
 
