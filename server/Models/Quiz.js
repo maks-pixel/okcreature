@@ -29,14 +29,21 @@ Quiz.init({
     other_pets: {
         type: DataTypes.BOOLEAN
     },
-    pet_id: {
+    user_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
         references: {
-            model: 'Pet',
+            model: 'user',
             key: 'id'
         }
-    }
+    },
+    // pet_id: {
+    //     type: DataTypes.INTEGER,
+    //     allowNull: false,
+    //     references: {
+    //         model: 'Pet',
+    //         key: 'id'
+    //     }
+    // }
 },
     {
         sequelize,
