@@ -1,8 +1,8 @@
 const router = require('express').Router();
-const { Quiz, User }= require('../../Models');
-const { post } = require('./user-routes');
+const { Quiz, User } = require('../../Models');
+const sequelize = require('../../config/connection');
 
-//get all users
+//get all quizes
 router.get('/', (req, res) =>{
     Quiz.findAll({
         attributes: [
@@ -17,7 +17,7 @@ router.get('/', (req, res) =>{
         order: [['created_at', 'DESC']],
         include:[
             {model: User,
-            attributes: ['username']
+            attributes: ['id']
         }
         ]
     })
@@ -74,7 +74,7 @@ router.post('/',(req, res) => {
       other_pets: req.body.other_pets,
       user_id: req.body.user_id
     })
-    .then(dbQuizData => res.json(dbQuizData))
+    .then(dbUserData => res.json(dbUserData))
     .catch(err => {
         console.log(err);
         res.status(500).json(err);
