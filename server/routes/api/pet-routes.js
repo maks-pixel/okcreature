@@ -21,7 +21,7 @@ router.get('/:id', (req, res) => {
     })
         .then(dbPetData => {
             if (!dbPetData) {
-                res.status(404).json({ message: 'No quiz found with this id' });
+                res.status(404).json({ message: 'No pet found with this id' });
                 return;
             }
             res.json(dbPetData);
