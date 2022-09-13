@@ -43,6 +43,7 @@ Pet.init({
     other_pets: {
         type: DataTypes.BOOLEAN
     },
+    //quiz_id gets assigned to pet when it is matched
     quiz_id: {
         type: DataTypes.INTEGER,
         references: {
@@ -55,6 +56,7 @@ Pet.init({
     {
         sequelize,
         freezeTableName: true,
+        timestamps: false, 
         underscored: true,
         modelName: 'Pet'
     });
