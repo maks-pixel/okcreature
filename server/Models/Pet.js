@@ -43,6 +43,13 @@ Pet.init({
     other_pets: {
         type: DataTypes.BOOLEAN
     },
+    quiz_id: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: 'Pet',
+            key: 'id'
+        }
+    }
     
 },
     {
